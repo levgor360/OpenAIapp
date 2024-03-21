@@ -4,7 +4,7 @@ import openai
 
 # Sidebar setup
 with st.sidebar:
-    st.title('Future Forecaster') # Title displayed on the side bar
+    st.title('Test test test') # Title displayed on the side bar
     openai_api_key = st.text_input('Enter OpenAI API key:', type='password') # Request OpenAI API key
     if not (openai_api_key.startswith('sk') and len(openai_api_key)==40): # Check that the key provided starts with sk and has 40 characters
         st.warning('Please enter your credentials!', icon='⚠️')
