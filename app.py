@@ -136,9 +136,18 @@ def OpenAI_call(prompt_input):
      msg = response.choices[0].message.content # Save generated output to variable 'msg'
      st.session_state.messages.append({"role": "assistant", "content": msg}) # Save response to the dictionary st.session_state.messages. The dictionary has values "role" and "content"
      st.chat_message("assistant").write(msg)     # Display the generated response by pulling the "msg" section
+    except openai.error.APIError as e:
+        st.error(f"OpenAI API returned an API Error: {str(e)}")
+    except openai.error.AuthenticationError:
+        st.error("Authentication failed. Please check your API key.")
+    except openai.error.InvalidRequestError as e:
+        st.error(f"Invalid request: {str(e)}")
+    except Exception as e:
+        st.error(f"An unexpected error occurred: {str(e)}")
 
 if prompt := st.chat_input():
     if not openai_api_key:
         st.info("Please add your OpenAI API key to continue.")
         st.stop()
     OpenAI_call(prompt)
+
