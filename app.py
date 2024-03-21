@@ -143,12 +143,3 @@ if prompt := st.chat_input():
         st.info("Please add your OpenAI API key to continue.")
         st.stop()
     OpenAI_call(prompt)
-    except openai.error.APIError as e:
-    st.error(f"OpenAI API returned an API Error: {str(e)}")
-    except openai.error.AuthenticationError:
-        st.error("Authentication failed. Please check your API key.")
-    except openai.error.InvalidRequestError as e:
-        st.error(f"Invalid request: {str(e)}")
-    except Exception as e:
-        st.error(f"An unexpected error occurred: {str(e)}")
-
