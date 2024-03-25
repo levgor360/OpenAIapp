@@ -2,15 +2,11 @@
 import streamlit as st
 from openai import OpenAI
 
-# Sidebar setup
+
 # Sidebar setup
 with st.sidebar:
     # Title displayed on the side bar
     st.title('Future Forecaster')
-    # Check if API key has been saved before
-    if openai_api_key in st.secrets:
-        st.success('API key already provided!', icon='✅')
-        openai_api_key = st.secrets['REPLICATE_API_TOKEN']
     # Request OpenAI API key
     openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
     # Check that the key provided starts with sk and has 40 characters
@@ -18,6 +14,10 @@ with st.sidebar:
         st.warning('Please enter your credentials!', icon='⚠️')
     else:
         st.success('Proceed to entering your prompt message!', icon='👉')
+    # Check if API key has been saved before
+    if openai_api_key in st.secrets:
+        st.success('API key already provided!', icon='✅')
+        openai_api_key = st.secrets['REPLICATE_API_TOKEN']
 
 
 # Create a list called "messages" in Streamlit database with an embedded dictionary which has keys "role" and "content".
