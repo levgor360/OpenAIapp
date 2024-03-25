@@ -28,7 +28,7 @@ for message in st.session_state.messages:
         st.write(message["content"])
 
 def clear_chat_history():
-    st.session_state.messages = [{"role": "assistant", "content": "Give me a subject matter to generate a future forecast on."}]
+    st.session_state.messages = [{"role": "assistant", "content": "Provive a subject matter to generate a future forecast on."}]
 st.sidebar.button('Clear Chat History', on_click=clear_chat_history)
 
 def back_end_prompt(prompt_input):
