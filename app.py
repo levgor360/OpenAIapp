@@ -131,7 +131,7 @@ a
     return string_dialogue
 
 def OpenAI_call(usr_prompt):
-
+    client = OpenAI(api_key=openai_api_key)
 
     st.session_state.messages.append({"role": "user", "content": back_end_prompt(usr_prompt)})
 
@@ -145,8 +145,7 @@ def OpenAI_call(usr_prompt):
         top_p=1,
         frequency_penalty=0,
         presence_penalty=0,
-        n=1,
-        api_key=openai_api_key  
+        n=1
     ) 
     
     st.chat_message("user").write(prompt)
