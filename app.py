@@ -16,15 +16,14 @@ with st.sidebar:
     else:
         st.success('Proceed to entering your prompt message!', icon='👉')
 
-
 # Create a list called "messages" in Streamlit database with an embedded dictionary which has keys "role" and "content".
 # These are to be populated by future user interactions, with role specifying whether it is the user or model interacting
 # and content documenting the user input or generated output
 if "messages" not in st.session_state.keys():
     st.session_state.messages = [{"role": "assistant", "content": "Provive a subject matter to generate a future forecast on."}]
-        
-# Create a database to save the user and model interactions into the "messages" dictionary
-for message in st.session_state.messages:
+
+# Show the relevant content from the database on the front end
+for message in st.session_state.messages[1:]:
     with st.chat_message(message["role"]):
         st.write(message["content"])
 
