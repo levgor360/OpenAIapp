@@ -20,10 +20,10 @@ with st.sidebar:
 # These are to be populated by future user interactions, with role specifying whether it is the user or model interacting
 # and content documenting the user input or generated output
 if "messages" not in st.session_state.keys():
-    st.session_state.messages = [{"role": "assistant", "content": "Provive a subject matter to generate a future forecast on."}]
-
+    st.session_state["messages"] = [{"role": "assistant", "content": "Provive a subject matter to generate a future forecast on."}]
+        
 # Show the relevant content from the database on the front end
-for message in st.session_state.messages[1:]:
+for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.write(message["content"])
 
