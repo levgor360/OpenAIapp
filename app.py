@@ -134,20 +134,20 @@ a
 def OpenAI_call(usr_prompt):
     client = OpenAI(api_key=openai_api_key)
 
-    for dict_message in st.session_state.messages:
-        if st.session.state.messages[0]:
-            if dict_message["role"] == "user:":
-                string_dialogue += "User: " + back_end_prompt(usr_prompt)
-        else:
-            string_dialogue += "User: " + dict_message["content"] + "\n\n"
-            string_dialogue += "Assistant: " + dict_message["content"] + "\n\n"
-        return string_dialogue
+    string_dialogue = []
+
+    if len(st.session_state.messages) == 1:
+        st.session_state.messages.append({"role": "user", "content": back_end_prompt(usr_prompt)})
+    else:
+        st.session_state.messages.append({"role": "user", "content": str((usr_prompt))})
+
+
 
     st.chat_message("user").write(prompt)
 
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
-        messages=string_dialogue,
+        messages=st.session_state.messages,
         temperature=1,
         max_tokens=256,
         top_p=1,
