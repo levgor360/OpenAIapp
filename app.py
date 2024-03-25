@@ -1,21 +1,30 @@
-# dependencies
-import streamlit as st
-from openai import OpenAI
+if prompt := st.chat_input():
+    if not openai_api_key:
+        st.info("Please add your OpenAI API key to continue.")
+        st.stop()
+
+OpenAI_call(prompt)
 
 # Sidebar setup
 with st.sidebar:
-    st.title('Future Forecaster') # Title displayed on the side bar
-    openai_api_key = st.text_input('Enter OpenAI API key:', type='password') # Request OpenAI API key
-    if not (openai_api_key.startswith('sk') and len(openai_api_key)==40): # Check that the key provided starts with sk and has 40 characters
+    # Title displayed on the side bar
+    st.title('Future Forecaster')
+    # Check if API key has been saved before
+    # Request OpenAI API key
+    openai_api_key = st.text_input('Enter OpenAI API key:', type='password')
+    # Check that the key provided starts with sk and has 40 characters
+    if not (openai_api_key.startswith('sk') and len(openai_api_key)==40):
         st.warning('Please enter your credentials!', icon='⚠️')
     else:
         st.success('Proceed to entering your prompt message!', icon='👉')
 
-# Create a dictionary called "messages" in Streamlit database and make the keys "role" and "content" to be populated by future user interactions, with role specifying whether it is the user or model interacting, and content documenting the user input or generated output
+# Create a list called "messages" in Streamlit database with an embedded dictionary which has keys "role" and "content".
+# These are to be populated by future user interactions, with role specifying whether it is the user or model interacting
+# and content documenting the user input or generated output
 if "messages" not in st.session_state.keys():
-    st.session_state.messages = [{"role": "assistant", "content": "Give me a subject matter to generate a future forecast on."}]
+    st.session_state.messages = [{"role": "assistant", "content": "Provive a subject matter to generate a future forecast on."}]
         
-# Save the user and model interactions into the "messages" dictionary
+# Create a database to save the user and model interactions into the "messages" dictionary
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.write(message["content"])
@@ -24,8 +33,8 @@ def clear_chat_history():
     st.session_state.messages = [{"role": "assistant", "content": "Give me a subject matter to generate a future forecast on."}]
 st.sidebar.button('Clear Chat History', on_click=clear_chat_history)
 
-def back_end_prompt(prompt_insert):
-    string_dialogue = """
+def back_end_prompt(prompt_input):
+    string_dialogue = f"""
         # Instructions:
 
         You are a generator of 'future scenarios' - stories about a potential future describing the life of a fictional character living a day in a life a decade into the future. The narrative of the 'future scenario' revolves around a single character and/or a family which is living in an imagined Nigeria in the year of 2034. The narrative of the 'future scenario' describes a typical day in the imaginary context of Nigeria in 2034.  Via a narrative, 'future scenarios' illustrate and bring to life the different opportunities, listed under sub-heading 'Opportunities', and dangers, listed under the sub-heading 'Dangers'. The elements listed under sub-heading 'Opportunities' and sub-heading  'Dangers' should be reflected in the narrative as things that impact the characters' daily lives in a way that seems unusual or provocative to the reader today. The target audience who will be reading the generated 'future scenarios' are Nigerian edTech innovation providers and Nigerian education professionals, so the narrative in the 'future scenarios' should be such that it carries intruiging and insightful takeaways for this target audience.
@@ -122,24 +131,36 @@ def back_end_prompt(prompt_insert):
         # Future forecast topic:
         {prompt_insert}
             """
-    for dict_message in st.session_state.messages:
-        if dict_message["role"] == "user":
-            string_dialogue += "User: " + dict_message["content"] + "\n\n"
-        else:
-            string_dialogue += "Assistant: " + dict_message["content"] + "\n\n"
     return string_dialogue
 
-def OpenAI_call(prompt_input):
-     client = OpenAI(api_key=openai_api_key)
-     st.chat_message("user").write(prompt_input) # display user's message in chat interface
-     response = client.chat.completions.create(model="gpt-3.5-turbo", messages=back_end_prompt(prompt_input)) # API request
-     msg = response.choices[0].message.content # Save generated output to variable 'msg'
-     st.session_state.messages.append({"role": "assistant", "content": msg}) # Save response to the dictionary st.session_state.messages. The dictionary has values "role" and "content"
-     st.chat_message("assistant").write(msg)     # Display the generated response by pulling the "msg" section
-   
+def OpenAI_call(prompt):
+
+    st.session_state.messages.append({"role": "user", "content": back_end_prompt(prompt_input)})
+
+    client = OpenAI(
+        api_key=openai_api_key
+    )
+
+    st.chat_message("user").write(prompt)
+
+    response = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=st.session_state.messages,
+        temperature=1,
+        max_tokens=256,
+        top_p=1,
+        frequency_penalty=0,
+        presence_penalty=0,
+        n=1  
+    ) 
+    
+    assistant_response = response.choices[0].message.content
+    st.session_state.messages.append({"role": "assistant", "content": assistant_response})
+    st.chat_message("assistant").write(assistant_response)
 
 if prompt := st.chat_input():
     if not openai_api_key:
         st.info("Please add your OpenAI API key to continue.")
         st.stop()
-    OpenAI_call(prompt)
+
+OpenAI_call(prompt)
