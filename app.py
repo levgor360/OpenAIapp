@@ -1,6 +1,6 @@
 # dependencies
 import streamlit as st
-import openai as OpenAI
+import openai
 
 # Sidebar setup
 with st.sidebar:
@@ -135,10 +135,6 @@ def OpenAI_call(usr_prompt):
 
     st.session_state.messages.append({"role": "user", "content": back_end_prompt(usr_prompt)})
 
-    client = OpenAI(
-        api_key=openai_api_key
-    )
-
     st.chat_message("user").write(usr_prompt)
 
     response = client.chat.completions.create(
@@ -149,7 +145,8 @@ def OpenAI_call(usr_prompt):
         top_p=1,
         frequency_penalty=0,
         presence_penalty=0,
-        n=1  
+        n=1,
+        api_key=openai_api_key  
     ) 
     
     assistant_response = response.choices[0].message.content
