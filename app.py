@@ -133,15 +133,16 @@ def back_end_prompt(prompt_input):
             """
     return string_dialogue
 
-def OpenAI_call(prompt):
+def OpenAI_call(usr_prompt):
 
-    st.session_state.messages.append({"role": "user", "content": back_end_prompt(prompt_input)})
+
+    st.session_state.messages.append({"role": "user", "content": back_end_prompt(usr_prompt)})
 
     client = OpenAI(
         api_key=openai_api_key
     )
 
-    st.chat_message("user").write(prompt)
+    st.chat_message("user").write(usr_prompt)
 
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
@@ -157,10 +158,14 @@ def OpenAI_call(prompt):
     assistant_response = response.choices[0].message.content
     st.session_state.messages.append({"role": "assistant", "content": assistant_response})
     st.chat_message("assistant").write(assistant_response)
+    
+    assistant_response = response.choices[0].message.content
+    st.session_state.messages.append({"role": "assistant", "content": assistant_response})
+    st.chat_message("assistant").write(assistant_response)
 
 if prompt := st.chat_input():
     if not openai_api_key:
         st.info("Please add your OpenAI API key to continue.")
         st.stop()
 
-OpenAI_call(prompt)
+    OpenAI_call(prompt)
