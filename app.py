@@ -134,12 +134,10 @@ a
 def OpenAI_call(usr_prompt):
     client = OpenAI(api_key=openai_api_key)
 
-    string_dialogue = []
-
     if len(st.session_state.messages) == 1:
-        st.session_state.messages.append({"role": "user", "content": back_end_prompt(usr_prompt)})
+        st.session_state.messages.append({"role": "user": "content": back_end_prompt(usr_prompt)})
     else:
-        st.session_state.messages.append({"role": "user", "content": str((usr_prompt))})
+        st.session_state.messages.append({"role": "user": "content": str((usr_prompt))})
 
 
 
@@ -155,7 +153,6 @@ def OpenAI_call(usr_prompt):
         presence_penalty=0,
         n=1
     ) 
-
     assistant_response = response.choices[0].message.content
     st.session_state.messages.append({"role": "assistant", "content": assistant_response})
     st.chat_message("assistant").write(assistant_response)
