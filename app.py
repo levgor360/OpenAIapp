@@ -135,9 +135,6 @@ def OpenAI_call(usr_prompt):
 
     st.session_state.messages.append({"role": "user", "content": back_end_prompt(usr_prompt)})
 
-    st.chat_message("user"):
-    	write(usr_prompt)
-
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=st.session_state.messages,
