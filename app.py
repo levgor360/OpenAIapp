@@ -1,9 +1,6 @@
-if prompt := st.chat_input():
-    if not openai_api_key:
-        st.info("Please add your OpenAI API key to continue.")
-        st.stop()
-
-OpenAI_call(prompt)
+# dependencies
+import streamlit as st
+import openai
 
 # Sidebar setup
 with st.sidebar:
@@ -154,10 +151,6 @@ def OpenAI_call(usr_prompt):
         presence_penalty=0,
         n=1  
     ) 
-    
-    assistant_response = response.choices[0].message.content
-    st.session_state.messages.append({"role": "assistant", "content": assistant_response})
-    st.chat_message("assistant").write(assistant_response)
     
     assistant_response = response.choices[0].message.content
     st.session_state.messages.append({"role": "assistant", "content": assistant_response})
