@@ -116,7 +116,7 @@ def back_end_prompt(prompt_input):
         She’ll be moving back with her mother and, to her surprise, so many more! Dad has a space in the house, even though they divorced ten years ago. Mom’s boyfriend Robert and his sister Jane moved in just before Autumn came home. Then along came Robert’s two teenage kids and Jane’s 10-year-old daughter. Now Jane is trying to get her partners to move in too.
 
         If it sounds like they all live in a huge house, they do. Mom and Dad bought one of those abandoned McMansions in the exurbs about 20 years ago. They both worked at home, and there was enough space on the property to go fully self-reliant for power and mostly self-reliant for food. They were at the leading edge of the “cooperation generation” movement, and loved having a chance to live their ideals. They call it Rivendell.
-
+a
         The area’s sparsely populated. It’s an exurban community, built originally on promises that home prices would always rise. Most of the other houses here are cluster homes as well. There’s a real village feel. The distance from the actual (big) city isn’t awful for anyone except Autumn, who really wishes that she could have stayed in her midtown flat, or any flat  within the city borders. Her old apartment building is undergoing resilience refits, so it can’t be occupied for a year. The rent will probably triple when they’re done.
 
         Autumn’s brother, Xander, has one of the converted family room spaces. He works in one of those hive mind brain-to-brain systems, contributing to some kind of research- nanotech, Autumn remembers. He’s in his room with a wire running from a weird bicycle helmet-looking-thing on his head to a small white box, completely oblivious to the world. He’s not the only one bringing in a financial stream. Robert does indirect management of urban inequality remediation teams. Mom still does the climate trauma counseling. Jane's between jobs, but nobody seems to mind because like Autumn, she lives on the Basic
@@ -126,7 +126,7 @@ def back_end_prompt(prompt_input):
         Using the instructions described under the heading "Instructions" and shaping the narrative in a way that is portrayed in the section "Examples", develop a 'future scenario' about 300-words long. The narrative should revolve around the subject matter defined under the heading "Future forecast topic"
 
         # Future forecast topic:
-        {prompt_insert}
+        {prompt_input}
             """
     return string_dialogue
 
