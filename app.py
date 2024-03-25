@@ -150,8 +150,6 @@ def OpenAI_call(usr_prompt):
         n=1
     ) 
     
-    st.chat_message("user").write(prompt)
-
     assistant_response = response.choices[0].message.content
     st.session_state.messages.append({"role": "assistant", "content": assistant_response})
     st.chat_message("assistant").write(assistant_response)
