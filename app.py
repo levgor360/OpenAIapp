@@ -10,7 +10,7 @@ with st.sidebar:
     # Request OpenAI API key
     openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
     # Check that the key provided starts with sk and has 40 characters
-    if not (openai_api_key.startswith('sk'):
+    if not (openai_api_key.startswith('sk')):
         st.warning('Invalid API key', icon='⚠️')
     else:
         st.success('Proceed to entering your prompt message!', icon='👉')
