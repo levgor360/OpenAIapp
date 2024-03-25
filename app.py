@@ -130,14 +130,13 @@ a
         {prompt_input}
             """
     return string_dialogue
-
 def OpenAI_call(usr_prompt):
     client = OpenAI(api_key=openai_api_key)
 
     if len(st.session_state.messages) == 1:
-        st.session_state.messages.append({"role": "user": "content": back_end_prompt(usr_prompt)})
+        st.session_state.messages.append({"role": "user", "content": back_end_prompt(usr_prompt)})
     else:
-        st.session_state.messages.append({"role": "user": "content": str((usr_prompt))})
+        st.session_state.messages.append({"role": "user", "content": str((usr_prompt))})
 
 
 
