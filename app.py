@@ -160,10 +160,10 @@ def OpenAI_call(usr_prompt):
         messages=st.session_state.messages,
         temperature=1,
         max_tokens=256,
-        top_p=1,
+        top_p=1,1
         frequency_penalty=0,
         presence_penalty=0,
-        n=1
+        n=chosen_number_of_samples
     ) 
     assistant_response = response.choices[0].message.content
     st.session_state.messages.append({"role": "assistant", "content": assistant_response})
