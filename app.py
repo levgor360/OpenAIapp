@@ -16,6 +16,7 @@ with st.sidebar:
     else:
         st.success('Proceed to entering your prompt message!', icon='👉')
 
+
 # Create a list called "messages" in Streamlit database with an embedded dictionary which has keys "role" and "content".
 # These are to be populated by future user interactions, with role specifying whether it is the user or model interacting
 # and content documenting the user input or generated output
@@ -130,6 +131,7 @@ a
         {prompt_input}
             """
     return string_dialogue
+
 def OpenAI_call(usr_prompt):
     client = OpenAI(api_key=openai_api_key)
 
