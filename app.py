@@ -34,7 +34,7 @@ if "messages" not in st.session_state.keys():
     st.session_state["messages"] = [{"role": "assistant", "content": "Provive a subject matter to generate a future forecast on."}]
         
 # Show the relevant content from the database on the front end
-for message in st.session_state.messages:
+for message in st.session_state.messages[1:]:
     with st.chat_message(message["role"]):
         st.write(message["content"])
 
