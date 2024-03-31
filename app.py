@@ -151,16 +151,14 @@ def OpenAI_call(usr_prompt):
     else:
         st.session_state.messages.append({"role": "user", "content": str((usr_prompt))})
 
-
-
     st.chat_message("user").write(prompt)
 
     response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model=chosen_model,
         messages=st.session_state.messages,
-        temperature=1,
-        max_tokens=256,
-        top_p=1,1
+        temperature=chosen_temperature,
+        max_tokens=chosen_max_length,
+        top_p=chosen_top_p,
         frequency_penalty=0,
         presence_penalty=0,
         n=chosen_number_of_samples
