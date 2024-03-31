@@ -23,9 +23,9 @@ if selected_model == 'GPT-3.5':
     chosen_model = "gpt-3.5-turbo"
 elif selected_model == 'GPT-4':
     chosen_model = "gpt-4"
-chosen_temperature = st.sidebar.slider('temperature', min_value=0.01, max_value=5.0, value=1, step=0.01)
-chosen_top_p = st.sidebar.slider('top_p', min_value=0.01, max_value=1.0, value=1, step=0.01)
-chosen_max_length = st.sidebar.slider('max_length', min_value=32, max_value=10000, value=150, step=8)
+# chosen_temperature = st.sidebar.slider('temperature', min_value=0.01, max_value=5.0, value=1, step=0.01)
+# chosen_top_p = st.sidebar.slider('top_p', min_value=0.01, max_value=1.0, value=1, step=0.01)
+# chosen_max_length = st.sidebar.slider('max_length', min_value=32, max_value=10000, value=150, step=8)
 
 # Create a list called "messages" in Streamlit database with an embedded dictionary which has keys "role" and "content".
 # These are to be populated by future user interactions, with role specifying whether it is the user or model interacting
