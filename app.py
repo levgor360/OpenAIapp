@@ -16,7 +16,7 @@ with st.sidebar:
     else:
         st.success('Proceed to entering your prompt message!', icon='👉')
 
-st.subheader('Models and parameters')
+st.subheader('Future Forecast Generator')
 chosen_model =""
 selected_model = st.sidebar.selectbox('Choose OpenAI models', ['GPT-4', 'GPT-3.5'], key='selected_model')
 if selected_model == 'GPT-3.5':
