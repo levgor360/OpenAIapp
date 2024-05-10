@@ -2,8 +2,6 @@
 import streamlit as st
 from openai import OpenAI
 
-
-
 # Sidebar setup
 with st.sidebar:
     # Title displayed on the side bar
@@ -25,7 +23,7 @@ elif selected_model == 'GPT-4':
     chosen_model = "gpt-4"
 chosen_temperature = st.sidebar.slider('temperature', min_value=0.01, max_value=5.0, value=1.0, step=0.01)
 chosen_top_p = st.sidebar.slider('top_p', min_value=0.01, max_value=1.0, value=1.0, step=0.01)
-chosen_max_length = st.sidebar.slider('max_length', min_value=32, max_value=10000, value=500, step=8)
+chosen_max_length = st.sidebar.slider('max_length', min_value=32, max_value=10000, value=2000, step=8)
 chosen_number_of_samples = st.sidebar.slider('Number of samples', min_value=1, max_value=3, value=1, step=1)
 
 #main window title setup
@@ -47,10 +45,12 @@ for message in st.session_state.messages[2:]:
     with st.chat_message(message["role"]):
         st.write(message["content"])
 
+#Make a button which clears the conversation and starts a new chat
 def clear_chat_history():
     st.session_state.messages = [{"role": "assistant", "content": "Provive a subject matter to generate a future forecast on."}]
 st.sidebar.button('Clear Chat History', on_click=clear_chat_history)
 
+#Back end prompt template
 def back_end_prompt(prompt_input):
     string_dialogue = f"""
         # Instructions:
@@ -151,10 +151,11 @@ a
             """
     return string_dialogue
 
+#Reach out to OpenAI, generate content and show the content to the user
 def OpenAI_call(usr_prompt):
     client = OpenAI(api_key=openai_api_key)
 
-    if len(st.session_state.messages) == 1:
+    if len(st.session_state.messages) == 1: #apply the backend prompt to the users input, but only on their first inout
         st.session_state.messages.append({"role": "user", "content": back_end_prompt(usr_prompt)})
     else:
         st.session_state.messages.append({"role": "user", "content": str((usr_prompt))})
@@ -174,7 +175,8 @@ def OpenAI_call(usr_prompt):
     assistant_response = response.choices[0].message.content
     st.session_state.messages.append({"role": "assistant", "content": assistant_response})
     st.chat_message("assistant").write(assistant_response)
-    
+
+# If user inserts an input without providing an API key, ask for API key
 if prompt := st.chat_input():
     if not openai_api_key:
         st.info("Please add your OpenAI API key to continue.")
