@@ -17,7 +17,9 @@ with st.sidebar:
         st.success('Proceed to entering your prompt message!', icon='👉')
 
 st.subheader('Future Forecast Generator')
-st.text('Enter an innovation in the window below and receive a future forecast which lists the opportunities and dangers related to that innovation as well as a story illustrating how this innovation can impact the life of a student in Nigeria 10 years from now')
+st.text('Enter an innovation in the window below and receive a future forecast')
+st.text('which lists the opportunities and dangers related to that innovation as')
+st.text('well as a story illustrating how this innovation can impact the life of a student in Nigeria 10 years from now')
 chosen_model =""
 selected_model = st.sidebar.selectbox('Choose OpenAI models', ['GPT-4', 'GPT-3.5'], key='selected_model')
 if selected_model == 'GPT-3.5':
