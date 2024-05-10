@@ -16,10 +16,7 @@ with st.sidebar:
     else:
         st.success('Proceed to entering your prompt message!', icon='👉')
 
-st.subheader('Future Forecast Generator')
-st.text('Enter an innovation in the window below and receive a future forecast')
-st.text('which lists the opportunities and dangers related to that innovation as')
-st.text('well as a story illustrating how this innovation can impact the life of a student in Nigeria 10 years from now')
+#sidebar toggles setup
 chosen_model =""
 selected_model = st.sidebar.selectbox('Choose OpenAI models', ['GPT-4', 'GPT-3.5'], key='selected_model')
 if selected_model == 'GPT-3.5':
@@ -30,6 +27,14 @@ chosen_temperature = st.sidebar.slider('temperature', min_value=0.01, max_value=
 chosen_top_p = st.sidebar.slider('top_p', min_value=0.01, max_value=1.0, value=1.0, step=0.01)
 chosen_max_length = st.sidebar.slider('max_length', min_value=32, max_value=10000, value=500, step=8)
 chosen_number_of_samples = st.sidebar.slider('Number of samples', min_value=1, max_value=3, value=1, step=1)
+
+#main window title setup
+st.subheader('Future Forecast Generator')
+st.text('Enter an innovation in the window below and receive a future forecast')
+st.text('which lists the opportunities and dangers related to that innovation as')
+st.text('well as a story illustrating how this innovation can impact the')
+st.text('life of a student in Nigeria 10 years from now')
+
 
 # Create a list called "messages" in Streamlit database with an embedded dictionary which has keys "role" and "content".
 # These are to be populated by future user interactions, with role specifying whether it is the user or model interacting
