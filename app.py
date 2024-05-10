@@ -14,17 +14,17 @@ with st.sidebar:
     else:
         st.success('Proceed to entering your prompt message!', icon='👉')
 
-#sidebar toggles setup
-chosen_model =""
-selected_model = st.sidebar.selectbox('Choose OpenAI models', ['GPT-4', 'GPT-3.5'], key='selected_model')
-if selected_model == 'GPT-3.5':
-    chosen_model = "gpt-3.5-turbo"
-elif selected_model == 'GPT-4':
-    chosen_model = "gpt-4"
-chosen_temperature = st.sidebar.slider('temperature', min_value=0.01, max_value=5.0, value=1.0, step=0.01)
-chosen_top_p = st.sidebar.slider('top_p', min_value=0.01, max_value=1.0, value=1.0, step=0.01)
-chosen_max_length = st.sidebar.slider('max_length', min_value=32, max_value=10000, value=2000, step=8)
-chosen_number_of_samples = st.sidebar.slider('Number of samples', min_value=1, max_value=3, value=1, step=1)
+    #sidebar toggles setup
+    chosen_model =""
+    selected_model = st.sidebar.selectbox('Choose OpenAI models', ['GPT-4', 'GPT-3.5'], key='selected_model')
+    if selected_model == 'GPT-3.5':
+        chosen_model = "gpt-3.5-turbo"
+    elif selected_model == 'GPT-4':
+        chosen_model = "gpt-4"
+    chosen_temperature = st.sidebar.slider('temperature', min_value=0.01, max_value=5.0, value=1.0, step=0.01)
+    chosen_top_p = st.sidebar.slider('top_p', min_value=0.01, max_value=1.0, value=1.0, step=0.01)
+    chosen_max_length = st.sidebar.slider('max_length', min_value=32, max_value=10000, value=2000, step=8)
+    chosen_number_of_samples = st.sidebar.slider('Number of samples', min_value=1, max_value=3, value=1, step=1)
 
 #main window title setup
 st.subheader('Future Forecast Generator')
