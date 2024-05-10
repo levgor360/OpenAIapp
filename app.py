@@ -1,5 +1,5 @@
 # dependencies
-import streamlit as st
+import streamlit as st 
 from openai import OpenAI
 
 # Sidebar setup
