@@ -13,7 +13,7 @@ with st.sidebar:
 
     #sidebar toggles setup
     chosen_model =""
-    selected_model = st.sidebar.selectbox('Choose OpenAI models', ['GPT-4', 'GPT-3.5'], key='selected_model')
+    selected_model = st.sidebar.selectbox('Choose OpenAI models', ['GPT-4', 'GPT-3.5'])
     if selected_model == 'GPT-3.5':
         chosen_model = "gpt-3.5-turbo"
     elif selected_model == 'GPT-4':
