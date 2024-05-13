@@ -41,9 +41,9 @@ for message in st.session_state.messages[2:]:
     with st.chat_message(message["role"]):
         st.write(message["content"])
 
-#Make a button which clears the conversation and starts a new chat
+# Make a button which clears the conversation and starts a new chat
 def clear_chat_history():
-    st.session_state.messages = [{"role": "assistant", "content": "Provive a subject matter to generate a future forecast on."}]
+    st.session_state.messages = [{"role": "assistant", "content": "Provide a subject matter to generate a future forecast on."}]
 st.sidebar.button('Clear Chat History', on_click=clear_chat_history)
 
 #Back end prompt template
